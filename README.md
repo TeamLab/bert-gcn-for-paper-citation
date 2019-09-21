@@ -5,8 +5,11 @@ Our model comprises a document encoder and a context encoder, which uses Graph C
 layer and Bidirectional Encoder Representations from Transformers ([BERT](https://arxiv.org/abs/1810.04805)), which is a pretrained model of textual data. 
 By modifying the related PeerRead,AAN dataset, we propose a new dataset called FullTextPeerRead, FullTextANN containing 
 context sentences to cited references and paper metadata.
+
+
 ![](https://i.imgur.com/FzmbImx.png)
 
+The code is based on that([BERT](https://github.com/google-research/bert), [GCN](https://github.com/tkipf/gae/)).
 
 ## Paper
  [A Context-Aware Citation Recommendation Model with BERT and Graph Convolutional Networks](https://arxiv.org/abs/1903.06464)
