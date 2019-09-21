@@ -10,7 +10,7 @@ We propose a deep learning based model and well-organized dataset for context aw
 ## Dataset we have
 The data set is paper citation(AAN, PeerRead),
 1. [AAN](https://www.arxiv-vanity.com/) - arXiv Vanity to create dataset.
-2. [PeerRead](https://github.com/allenaio/PeerRead) - allenai dataset to create dataset 
+2. [PeerRead](https://github.com/allenai/PeerRead) - allenai dataset to create dataset 
 
 |  Header        | Description     | 
 | :------------- | :----------: |
