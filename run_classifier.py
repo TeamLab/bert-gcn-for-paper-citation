@@ -288,9 +288,10 @@ class BertGcnProcessor(DataProcessor):
         self.train_df, self.test_df, self.lb = load_data(self.dataset, self.column, self.frequency, self.seq_len,
                                                          self.year, self.bert_column)
         #self.gcn_data = load_pickle(FLAGS.data_dir, self.meta_dataset_name)
-        self.gcn_train, self.gcn_test, self.embedding, self.node2id = get_gcn_data(self.train_df, self.test_df, FLAGS.data_dir,
+        self.gcn_train, self.gcn_test, self.embedding, self.node2id = get_gcn_data(self.train_df, self.test_df,
+                                                                                   './pre_train/gcn',
                                                                # self.meta_dataset_name)
-                                                                                   'gcn_pretrain.pkl')
+                                                                                   '{}_gcn_pretrain.pkl'.format(dataset))
         self.meta_shape = 1 # self.gcn_data.shape[1]
 
     def get_train_examples(self, data_dir):
@@ -507,7 +508,7 @@ def _truncate_seq_pair(tokens_a, tokens_b, max_length):
 
 
 def create_model(bert_config, is_training, input_ids, input_mask, segment_ids,
-                 labels, num_labels, use_one_hot_embeddings, metas=None, model='bert_base'):
+                 labels, num_labels, use_one_hot_embeddings, metas=None, model='bert_base', dataset='AAN'):
     """Creates a classification model."""
     model = modeling.BertModel(
         config=bert_config,
@@ -517,7 +518,8 @@ def create_model(bert_config, is_training, input_ids, input_mask, segment_ids,
         token_type_ids=segment_ids,
         use_one_hot_embeddings=use_one_hot_embeddings,
         metas=metas,
-        model=model
+        model=model,
+        dataset=dataset
     )
 
     # In the demo, we are doing a simple classification task on the entire
@@ -581,7 +583,7 @@ def model_fn_builder(bert_config, num_labels, init_checkpoint, learning_rate,
 
         (total_loss, per_example_loss, logits, probabilities) = create_model(
             bert_config, is_training, input_ids, input_mask, segment_ids, label_ids,
-            num_labels, use_one_hot_embeddings, metas, FLAGS.model)
+            num_labels, use_one_hot_embeddings, metas, FLAGS.model, FLAGS.dataset)
 
         tvars = tf.trainable_variables()
         initialized_variable_names = {}

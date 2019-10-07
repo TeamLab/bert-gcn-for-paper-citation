@@ -114,7 +114,7 @@ def load_pickle(dr, filename):
 
 
 def get_gcn_data(train_df, test_df, save_dir, filename):
-    lb_dr = os.path.join(save_dir, filename)
+    lb_dr = os.path.join(save_dir, filename.split('_')[0], filename)
     with open(lb_dr, 'rb') as f:
         embedding = pickle.load(f)
         node2id = pickle.load(f)

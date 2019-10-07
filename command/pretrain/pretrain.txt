@@ -1,0 +1,7 @@
+# AAN pretrain
+
+python gcn_pretrain.py  --dataset AAN --gcn_hidden1 7071
+
+# PeerRead pretrain
+
+python gcn_pretrain.py  --dataset PeerRead --gcn_hidden1 4837

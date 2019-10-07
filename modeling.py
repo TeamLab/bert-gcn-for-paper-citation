@@ -131,6 +131,7 @@ class BertModel(object):
                scope=None,
                metas=None,
                model='bert_base',
+               dataset='AAN'
                ):
     """Constructor for BertModel.
     Args:
@@ -233,7 +234,7 @@ class BertModel(object):
           # tf.logging.info(metas)
           import os
           import pickle
-          lb_dr = os.path.join('./glue/ACRS', 'gcn_pretrain.pkl')
+          lb_dr = os.path.join('./pre_train/gcn', dataset, '{}_gcn_pretrain.pkl'.format(dataset))
           with open(lb_dr, 'rb') as f:
               pre_embedding = pickle.load(f)
               node2id = pickle.load(f)
@@ -244,7 +245,8 @@ class BertModel(object):
               initializer_range=config.initializer_range,
               word_embedding_name="paper_embeddings",
               use_one_hot_embeddings=use_one_hot_embeddings,
-              pretrain_value=pre_embedding)
+              pretrain_value=pre_embedding,
+              dataset=dataset)
         # self.pooled_output = tf.concat([self.pooled_output, metas], 1)
           paper_first_token_tensor = tf.reshape(self.paper_embedding_output, [-1, 768])
           self.pooled_output = tf.concat([self.pooled_output, paper_first_token_tensor], 1)
@@ -391,7 +393,8 @@ def embedding_lookup(input_ids,
                      initializer_range=0.02,
                      word_embedding_name="word_embeddings",
                      use_one_hot_embeddings=False,
-                     pretrain_value=''):
+                     pretrain_value='',
+                     dataset='AAN'):
   """Looks up words embeddings for id tensor.
   Args:
     input_ids: int32 Tensor of shape [batch_size, seq_length] containing word
@@ -418,7 +421,7 @@ def embedding_lookup(input_ids,
           name=word_embedding_name,
           #shape=[vocab_size, embedding_size],
           initializer=tf.constant(pretrain_value),
-          trainable=False
+          trainable=False if dataset == 'AAN' else True
           )
   else:
     embedding_table = tf.get_variable(
