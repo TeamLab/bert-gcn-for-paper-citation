@@ -17,7 +17,7 @@ The code is based on that([BERT](https://github.com/google-research/bert), [GCN]
 ![](https://i.imgur.com/oddSCAH.png)
 
 ## Data
-- [Full Context PeerRead](http://bit.ly/2Srkdht) : Created by processing [allenai-PeerRead](https://github.com/allenai/PeerRead)
+- [Full Context PeerRead](https://drive.google.com/open?id=1GnArDN4CAYeialDn4XYZN_K_Fl79Oq0g) : Created by processing [allenai-PeerRead](https://github.com/allenai/PeerRead)
 - [Full Context ANN](http://bit.ly/2Srkdht) : Created by processing [arXiv Vanity](https://www.arxiv-vanity.com/) (Not disclosed due to copyright.)
 
 There are two types of data, AAN and PeerRead. Both columns are identical.
